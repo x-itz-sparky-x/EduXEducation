@@ -30,7 +30,7 @@ export default function ForgotPasswordPage() {
           Reset Password
         </h1>
         <p className="text-muted text-sm">
-          Enter your email and we'll send you a link to reset your password.
+          Enter your email and we&apos;ll send you a link to reset your password.
         </p>
       </div>
 
@@ -60,7 +60,7 @@ export default function ForgotPasswordPage() {
             Check your inbox!
           </p>
           <p className="text-emerald-500/80 text-xs">
-            We've sent a password reset link to {email}
+            We&apos;ve sent a password reset link to {email}
           </p>
         </motion.div>
       )}

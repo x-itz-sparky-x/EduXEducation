@@ -32,7 +32,7 @@ export default async function DashboardPage() {
         <h2 className="text-3xl font-display font-bold text-white mb-2">
           Welcome back, {session.user.name?.split(" ")[0]}!
         </h2>
-        <p className="text-muted">Here's a summary of your learning progress.</p>
+        <p className="text-muted">Here&apos;s a summary of your learning progress.</p>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -74,7 +74,7 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <p className="text-muted mb-4">You haven't started any courses yet.</p>
+              <p className="text-muted mb-4">You haven&apos;t started any courses yet.</p>
               <a href="/#courses" className="text-primary-400 hover:text-primary-300 font-medium">Browse Courses &rarr;</a>
             </div>
           )}
