@@ -15,16 +15,12 @@ export default async function AdminPage() {
   const users = await db.user.findMany({
     orderBy: { createdAt: "desc" },
     take: 10,
-    include: {
-      payments: true,
-    }
   });
 
-  type UserWithPayments = typeof users[0];
-
-  const totalRevenue = users.reduce((acc: number, user: UserWithPayments) => {
-    return acc + user.payments.reduce((sum: number, p: { amount: number }) => sum + p.amount, 0);
-  }, 0);
+  const allUsersCount = await db.user.count();
+  const proUsersCount = await db.user.count({
+    where: { membership: { not: "FREE" } }
+  });
 
   return (
     <div className="space-y-8">
@@ -36,11 +32,11 @@ export default async function AdminPage() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="glass-card p-6">
           <p className="text-sm font-medium text-muted">Total Users</p>
-          <h3 className="text-2xl font-bold text-white mt-1">{users.length}</h3>
+          <h3 className="text-2xl font-bold text-white mt-1">{allUsersCount}</h3>
         </div>
         <div className="glass-card p-6">
-          <p className="text-sm font-medium text-muted">Total Revenue</p>
-          <h3 className="text-2xl font-bold text-white mt-1">₹{totalRevenue / 100}</h3>
+          <p className="text-sm font-medium text-muted">Pro Users</p>
+          <h3 className="text-2xl font-bold text-white mt-1">{proUsersCount}</h3>
         </div>
       </div>
 
@@ -59,7 +55,7 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {users.map((user: UserWithPayments) => (
+              {users.map((user) => (
                 <tr key={user.id} className="hover:bg-white/[0.02]">
                   <td className="px-6 py-4 font-medium text-white">{user.name}</td>
                   <td className="px-6 py-4 text-muted">{user.email}</td>

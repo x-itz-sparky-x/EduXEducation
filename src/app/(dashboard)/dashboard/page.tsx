@@ -13,10 +13,6 @@ export default async function DashboardPage() {
     where: { id: session.user.id },
     include: {
       courseProgress: true,
-      payments: {
-        orderBy: { createdAt: 'desc' },
-        take: 3
-      }
     }
   });
 
@@ -82,28 +78,11 @@ export default async function DashboardPage() {
 
         {/* Recent Activity */}
         <div className="glass-card p-6">
-          <h3 className="text-xl font-bold text-white mb-4">Recent Payments</h3>
-          {user?.payments.length ? (
-            <div className="space-y-4">
-              {user.payments.map((payment: { id: string, membershipPurchased: string, createdAt: Date, amount: number }) => (
-                <div key={payment.id} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10">
-                  <div>
-                    <h4 className="font-medium text-white">{payment.membershipPurchased} Plan Upgrade</h4>
-                    <p className="text-xs text-muted">{new Date(payment.createdAt).toLocaleDateString()}</p>
-                  </div>
-                  <div className="text-right">
-                    <span className="font-medium text-white">₹{payment.amount / 100}</span>
-                    <p className="text-xs text-emerald-400">Success</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-8">
-              <p className="text-muted mb-4">No recent payments found.</p>
-              <a href="/#pricing" className="text-primary-400 hover:text-primary-300 font-medium">Upgrade Plan &rarr;</a>
-            </div>
-          )}
+          <h3 className="text-xl font-bold text-white mb-4">Recent Activity</h3>
+          <div className="text-center py-8">
+            <p className="text-muted mb-4">No recent activity found.</p>
+            <a href="/#courses" className="text-primary-400 hover:text-primary-300 font-medium">Browse Courses &rarr;</a>
+          </div>
         </div>
       </div>
     </div>

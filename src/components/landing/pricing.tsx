@@ -82,13 +82,13 @@ export function Pricing() {
   const { data: session, update } = useSession();
   const router = useRouter();
 
-  const handlePayment = async (planName: string, price: string) => {
+  const handleEnrollment = async (planName: string, price: string) => {
     if (!session) {
       router.push("/login");
       return;
     }
 
-    // Since payment gateway is removed, redirect to dashboard directly.
+    // Redirect to dashboard directly for enrollment.
     router.push("/dashboard");
   };
 
@@ -229,7 +229,7 @@ export function Pricing() {
                       size="lg"
                       className={`w-full mb-8 ${plan.highlighted ? "shadow-glow" : ""}`}
                       disabled={disabled || loadingPlan === plan.name}
-                      onClick={() => handlePayment(plan.name, plan.price)}
+                      onClick={() => handleEnrollment(plan.name, plan.price)}
                     >
                       {loadingPlan === plan.name ? (
                         <Loader2 size={18} className="animate-spin" />

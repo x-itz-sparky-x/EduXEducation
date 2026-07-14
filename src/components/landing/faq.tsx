@@ -13,7 +13,7 @@ const faqs = [
   {
     question: "How do I enroll in a course?",
     answer:
-      "Enrolling is simple! Browse our programs, choose the plan that suits your goals, and complete the secure checkout. Once payment is confirmed, you'll receive instant access to your courses and can start learning immediately from your personalized dashboard.",
+      "Enrolling is simple! Browse our programs, choose the plan that suits your goals, and select it. You'll receive instant access to your courses and can start learning immediately from your personalized dashboard.",
   },
   {
     question: "Will I receive a certificate after completing a course?",
@@ -38,7 +38,7 @@ const faqs = [
   {
     question: "How can I upgrade my membership plan?",
     answer:
-      "You can upgrade your plan at any time from your account settings. Navigate to 'Membership' in your dashboard, choose your desired plan, and complete the payment. Your new benefits will be activated instantly, and any additional course modules will be unlocked immediately.",
+      "You can upgrade your plan at any time from your account settings. Navigate to 'Membership' in your dashboard, and choose your desired plan. Your new benefits will be activated instantly, and any additional course modules will be unlocked immediately.",
   },
 ];
 
