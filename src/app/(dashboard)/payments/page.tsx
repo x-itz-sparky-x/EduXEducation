@@ -49,7 +49,7 @@ export default async function PaymentsPage() {
                   </td>
                 </tr>
               ) : (
-                user.payments.map((payment) => (
+                user.payments.map((payment: { id: string, razorpayPaymentId: string, createdAt: Date, membershipPurchased: string, amount: number, razorpayOrderId: string, currency: string, status: string }) => (
                   <tr key={payment.id} className="hover:bg-white/[0.02] transition-colors">
                     <td className="px-6 py-4 font-mono text-xs text-muted">
                       {payment.razorpayPaymentId}

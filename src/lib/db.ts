@@ -51,4 +51,4 @@ if (!process.env.DATABASE_URL) {
   }
 }
 
-export const db: any = prismaClient;
+export const db = prismaClient;

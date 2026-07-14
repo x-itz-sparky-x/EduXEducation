@@ -22,7 +22,7 @@ export default async function DashboardPage() {
 
   const stats = [
     { label: "Courses Enrolled", value: user?.courseProgress.length || 0, icon: BookOpen, color: "text-blue-400", bg: "bg-blue-400/10" },
-    { label: "Completed Lessons", value: user?.courseProgress.reduce((acc, curr) => acc + curr.completedLessons, 0) || 0, icon: Trophy, color: "text-emerald-400", bg: "bg-emerald-400/10" },
+    { label: "Completed Lessons", value: user?.courseProgress.reduce((acc: number, curr: { completedLessons: number }) => acc + curr.completedLessons, 0) || 0, icon: Trophy, color: "text-emerald-400", bg: "bg-emerald-400/10" },
     { label: "Current Plan", value: user?.membership || "FREE", icon: Clock, color: "text-primary-400", bg: "bg-primary-400/10" },
   ];
 
@@ -85,7 +85,7 @@ export default async function DashboardPage() {
           <h3 className="text-xl font-bold text-white mb-4">Recent Payments</h3>
           {user?.payments.length ? (
             <div className="space-y-4">
-              {user.payments.map((payment) => (
+              {user.payments.map((payment: { id: string, membershipPurchased: string, createdAt: Date, amount: number }) => (
                 <div key={payment.id} className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10">
                   <div>
                     <h4 className="font-medium text-white">{payment.membershipPurchased} Plan Upgrade</h4>

@@ -20,8 +20,10 @@ export default async function AdminPage() {
     }
   });
 
-  const totalRevenue = users.reduce((acc, user) => {
-    return acc + user.payments.reduce((sum, p) => sum + p.amount, 0);
+  type UserWithPayments = typeof users[0];
+
+  const totalRevenue = users.reduce((acc: number, user: UserWithPayments) => {
+    return acc + user.payments.reduce((sum: number, p: { amount: number }) => sum + p.amount, 0);
   }, 0);
 
   return (
@@ -57,7 +59,7 @@ export default async function AdminPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">
-              {users.map((user) => (
+              {users.map((user: UserWithPayments) => (
                 <tr key={user.id} className="hover:bg-white/[0.02]">
                   <td className="px-6 py-4 font-medium text-white">{user.name}</td>
                   <td className="px-6 py-4 text-muted">{user.email}</td>
