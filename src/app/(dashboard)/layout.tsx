@@ -13,7 +13,6 @@ const sidebarLinks = [
   { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
   { label: "My Courses", href: "/dashboard/courses", icon: PlaySquare },
   { label: "Certificates", href: "/dashboard/certificates", icon: Award },
-  { label: "Payments", href: "/dashboard/payments", icon: CreditCard },
   { label: "Membership", href: "/dashboard/membership", icon: Crown },
   { label: "Settings", href: "/dashboard/settings", icon: Settings },
   { label: "Profile", href: "/dashboard/profile", icon: User },

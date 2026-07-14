@@ -54,7 +54,6 @@ model User {
 
   accounts        Account[]
   sessions        Session[]
-  payments        Payment[]
   courseProgress  CourseProgress[]
 }
 
@@ -64,21 +63,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-}
-
-model Payment {
-  id                  String     @id @default(cuid())
-  userId              String
-  razorpayPaymentId   String     @unique
-  razorpayOrderId     String     @unique
-  razorpaySignature   String
-  amount              Int
-  currency            String
-  status              String
-  membershipPurchased Membership
-  createdAt           DateTime   @default(now())
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model CourseProgress {

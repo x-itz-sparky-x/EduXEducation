@@ -82,93 +82,14 @@ export function Pricing() {
   const { data: session, update } = useSession();
   const router = useRouter();
 
-  const loadRazorpay = () => {
-    return new Promise((resolve) => {
-      const script = document.createElement("script");
-      script.src = "https://checkout.razorpay.com/v1/checkout.js";
-      script.onload = () => resolve(true);
-      script.onerror = () => resolve(false);
-      document.body.appendChild(script);
-    });
-  };
-
   const handlePayment = async (planName: string, price: string) => {
     if (!session) {
       router.push("/login");
       return;
     }
 
-    setLoadingPlan(planName);
-
-    try {
-      const res = await loadRazorpay();
-      if (!res) {
-        alert("Razorpay SDK failed to load. Are you online?");
-        setLoadingPlan(null);
-        return;
-      }
-
-      // Create Order
-      const orderRes = await fetch("/api/razorpay/order", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan: planName, price }),
-      });
-
-      const orderData = await orderRes.json();
-
-      if (!orderRes.ok) {
-        alert(orderData.error || "Failed to create order");
-        setLoadingPlan(null);
-        return;
-      }
-
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Use NEXT_PUBLIC for client side if needed, or pass via API
-        amount: orderData.amount,
-        currency: orderData.currency,
-        name: "EduXEducation",
-        description: `Upgrade to ${planName} Plan`,
-        order_id: orderData.id,
-        handler: async function (response: any) {
-          // Verify Signature
-          const verifyRes = await fetch("/api/razorpay/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              razorpay_order_id: response.razorpay_order_id,
-              razorpay_payment_id: response.razorpay_payment_id,
-              razorpay_signature: response.razorpay_signature,
-              plan: planName,
-              amount: price,
-            }),
-          });
-
-          const verifyData = await verifyRes.json();
-          if (verifyRes.ok) {
-            await update({ membership: planName.toUpperCase() });
-            router.push("/dashboard/payments");
-          } else {
-            alert(verifyData.error || "Payment verification failed");
-          }
-        },
-        prefill: {
-          name: session.user?.name,
-          email: session.user?.email,
-        },
-        theme: {
-          color: "#7C3AED",
-        },
-      };
-
-      const paymentObject = new (window as any).Razorpay(options);
-      paymentObject.open();
-    } catch (error) {
-      console.error(error);
-      alert("Something went wrong");
-    } finally {
-      setLoadingPlan(null);
-    }
+    // Since payment gateway is removed, redirect to dashboard directly.
+    router.push("/dashboard");
   };
 
   const getButtonState = (planName: string) => {
